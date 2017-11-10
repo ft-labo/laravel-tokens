@@ -2,12 +2,37 @@
 
 namespace ForTheLocal\Tests;
 
+use ForTheLocal\Token\Provider;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
 {
     use RefreshDatabase;
+
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->setUpDatabase($this->app);
+
+    }
+
+    private function setUpDatabase($app)
+    {
+
+        $app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+        });
+        $app['db']->connection()->getSchemaBuilder()->create('posts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+        });
+
+        include_once __DIR__ . '/support/models.php';
+    }
 
     /**
      * Load package service provider
@@ -18,6 +43,7 @@ abstract class TestCase extends OrchestraTestCase
     {
         return [
             \Orchestra\Database\ConsoleServiceProvider::class,
+            Provider::class
         ];
     }
 

@@ -9,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ForTheLocal\\": "src/"
+            "ForTheLocal\\Token\\": "src/"
         }
     },
     "minimum-stability": "stable",
