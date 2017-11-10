@@ -1,0 +1,26 @@
+{
+    "name": "forthelocal/laravel-tokens",
+    "description": "php implementation of https://github.com/fnando/tokens.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "7.1.8",
+        "illuminate/database": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ForTheLocal\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^6.3",
+        "orchestra/testbench": "^3.5",
+        "orchestra/database": "^3.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ForTheLocal\\Tests\\": "tests/"
+        }
+    }
+}
