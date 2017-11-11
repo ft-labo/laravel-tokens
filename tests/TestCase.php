@@ -24,11 +24,9 @@ abstract class TestCase extends OrchestraTestCase
 
         $app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
         });
         $app['db']->connection()->getSchemaBuilder()->create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
         });
 
         include_once __DIR__ . '/support/models.php';

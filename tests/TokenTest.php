@@ -29,22 +29,45 @@ class TokenTest extends TestCase
 
     public function testIsExpired()
     {
-        $user = User::create(['name' => 'name']);
-        $optionsValid = ["expires_at" => strtotime('1 second', time())];
-        $optionsExpired = ["expires_at" => strtotime('-1 second', time())];
+        $user = User::create();
 
-        $expiredToken = $user->addToken("expired", $optionsExpired);
-        $validToken = $user->addToken("not expired", $optionsValid);
+        $expiredToken = $user->addToken("expired", ["expires_at" => strtotime('-1 second', time())]);
+        $validToken = $user->addToken("not expired",  ["expires_at" => strtotime('10 second', time())]);
 
         $this->assertTrue($expiredToken->isExpired());
         $this->assertFalse($validToken->isExpired());
 
     }
 
+    public function testData()
+    {
+        $user = User::create();
+        $token = $user->addToken("foo");
+
+        $this->assertEquals(json_decode("foo"), $token->data);
+
+        $jsonStar = '{"a":{"b":[{"c":"1"},{"c":"2"}]}}';
+        $jsonArray = json_decode($jsonStar);
+
+        $token = $user->addToken("foo", ["data" => $jsonStar]);
+        $this->assertEquals($jsonArray, $token->data);
+
+        $token = $user->addToken("foo", ["data" => $jsonArray]);
+        $this->assertEquals($jsonArray, $token->data);
+    }
+
+    public function testToString()
+    {
+        $user = User::create();
+        $token = $user->addToken("expired");
+
+        $this->assertEquals($token->token, $token);
+    }
+
     public function testClean()
     {
 
-        $user = User::create(['name' => 'name']);
+        $user = User::create();
 
         $names = ['foo', 'bar', 'baz'];
         $options = ["expires_at" => strtotime('-1 second', time())];

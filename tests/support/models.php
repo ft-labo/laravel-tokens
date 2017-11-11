@@ -1,29 +1,17 @@
 <?php
 namespace ForTheLocal\Tests;
 
-use ForTheLocal\Token\Tokenize;
+use ForTheLocal\Token\Tokenizable;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    use Tokenize;
-
+    use Tokenizable;
     public $timestamps = false;
-    protected $fillable = ['name'];
-
-    public function tokens()
-    {
-        return $this->morphMany('ForTheLocal\Token\Token', 'tokenizable');
-    }
 }
 
 class Post extends Model
 {
+    use Tokenizable;
     public $timestamps = false;
-    protected $fillable = ['title'];
-
-    public function tokens()
-    {
-        return $this->morphMany('ForTheLocal\Token\Token', 'tokenizable');
-    }
 }
