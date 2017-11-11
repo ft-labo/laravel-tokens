@@ -1,9 +1,12 @@
 # Laravel Tokens
 The token implementation inspired by https://github.com/fnando/tokens.
 
-[![Build Status](https://travis-ci.org/forthelocal/laravel-tokens.svg?branch=master)](https://travis-ci.org/forthelocal/laravel-tokens)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/forthelocal/laravel-tokens.svg)]()
+[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/a95b11eb67752f90c055/maintainability)](https://codeclimate.com/github/forthelocal/laravel-tokens/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/a95b11eb67752f90c055/test_coverage)](https://codeclimate.com/github/forthelocal/laravel-tokens/test_coverage)
+[![Build Status](https://travis-ci.org/forthelocal/laravel-tokens.svg?branch=master)](https://travis-ci.org/forthelocal/laravel-tokens) 
+[![codecov](https://codecov.io/gh/forthelocal/laravel-tokens/branch/master/graph/badge.svg)](https://codecov.io/gh/forthelocal/laravel-tokens)
+
 ## Usage
 
 ### Installation
@@ -25,7 +28,7 @@ $user = user = User::create();
 $user->addToken("activate");
 
 // uses custom expires_at
-user->addToken("valid", ["expires_at" => strtotime('1 day', time())])
+user->addToken("valid", ["expires_at" => strtotime('1 day', time())]);
 
 // uses the default size (48 characters)
 $user->addToken("activate");

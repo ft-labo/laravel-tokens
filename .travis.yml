@@ -1,6 +1,3 @@
-env:
-  global:
-    - CC_TEST_REPORTER_ID=7ba19f4671b8052a9ab60ac8fdb5034e14cc7799334d2a2d5b6a80d9c4b9bf81
 language: php
 sudo: false
 cache:
@@ -9,9 +6,11 @@ cache:
 php:
   - 7.1.8
 before_script:
-  - composer install
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source --dev
+
+script:
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - bash <(curl -s https://codecov.io/bash)
