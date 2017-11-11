@@ -2,28 +2,23 @@
 
 namespace ForTheLocal\Token;
 
-trait Tokenize
+trait Tokenizable
 {
 
-    public function findToken(string $name, string $token): ?Token
+    public function tokens()
     {
-        return $this->tokens()->where('name', $name)->where('token', $token)->first();
+        return $this->morphMany('ForTheLocal\Token\Token', 'tokenizable');
     }
 
     public function findValidToken(string $name, string $token): ?Token
     {
-        $token = $this->tokens()->where('name', $name)->where('token', $token)->first();
+        $token = $this->tokens()->where(['name' => $name, 'token' => $token])->first();
 
         if ($token == null) {
             return null;
         }
 
         return $token->isExpired() ? null : $token;
-    }
-
-    public function isValidToken(string $name, string $token): bool
-    {
-
     }
 
     public function findTokenByName(string $name): ?Token
@@ -51,8 +46,7 @@ trait Tokenize
         ];
 
         foreach ($defaultOption as $key => $value) {
-            if (!array_key_exists($key, $options))
-            {
+            if (!array_key_exists($key, $options)) {
                 $options[$key] = $value;
             }
         }
@@ -64,10 +58,38 @@ trait Tokenize
             'name' => $name,
             'token' => $options['token'],
             'expires_at' => $options['expires_at'],
-            'data' => $options['data']
+            'data' => $this->encodeToJsonString($options['data'])
         ];
 
         return $this->tokens()->create($attr);
+    }
+
+    public static function generateToken($length = null): string
+    {
+        return $length == null ? Token::generateToken() : Token::generateToken($length);
+    }
+
+    public static function findByToken(string $name, string $token)
+    {
+        return self::whereHas('tokens', function ($query) use ($name, $token) {
+            $query->where(['name' => $name, 'token' => $token]);
+        })->get()->first();
+    }
+
+    public static function findByValidToken(string $name, string $token)
+    {
+        return self::whereHas('tokens', function ($query) use ($name, $token) {
+            $query->where(['name' => $name, 'token' => $token])->where('expires_at', '>', time());
+        })->get()->first();
+    }
+
+    private function encodeToJsonString($data)
+    {
+        if (is_string($data)) {
+            return $data;
+        }
+
+        return json_encode($data);
     }
 
 

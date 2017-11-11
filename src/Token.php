@@ -10,6 +10,18 @@ class Token extends Model
     protected $fillable = ['name', 'token', 'data', 'expires_at'];
     public $timestamps = false;
 
+    public function __get($name)
+    {
+        if ($name == "data") {
+            return empty($this['data']) ? json_decode('{}') : json_decode($this['data']);
+        }
+
+        if (array_key_exists($name, $this->attributes)) {
+            return $this[$name];
+        }
+
+        return null;
+    }
 
     public function isExpired(): bool
     {
@@ -36,16 +48,16 @@ class Token extends Model
     }
 
     /*
-     * @param int size (must be between 24 and 240)
+     * @param int length (must be between 24 and 240)
      */
-    public static function generateToken(int $size = 48): string
+    public static function generateToken(int $length = 48): string
     {
-        if ($size < 24 || $size > 240) {
+        if ($length < 24 || $length > 240) {
             throw new InvalidArgumentException('$length must be between 24 and 240');
         }
 
         do {
-            $token = substr(bin2hex(random_bytes($size)), 0, $size);
+            $token = substr(bin2hex(random_bytes($length)), 0, $length);
         } while (Token::where('token', $token)->first() != null);
 
         return $token;
@@ -55,7 +67,6 @@ class Token extends Model
     {
         return Token::where('expires_at', '<', time())->delete();
     }
-
 
 }
 
