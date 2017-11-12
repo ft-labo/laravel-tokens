@@ -9,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ForTheLocal\\Token\\": "src/"
+            "ForTheLocal\\Laravel\\Token\\": "src/"
         }
     },
     "minimum-stability": "stable",
@@ -20,7 +20,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ForTheLocal\\Tests\\": "tests/"
+            "ForTheLocal\\Test\\": "tests/"
         }
     }
 }

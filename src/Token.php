@@ -1,6 +1,6 @@
 <?php
 
-namespace ForTheLocal\Token;
+namespace ForTheLocal\Laravel\Token;
 
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;

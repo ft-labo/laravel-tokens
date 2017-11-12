@@ -1,7 +1,7 @@
 <?php
-namespace ForTheLocal\Tests;
+namespace ForTheLocal\Test;
 
-use ForTheLocal\Token\Tokenizable;
+use ForTheLocal\Laravel\Token\Tokenizable;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
