@@ -1,13 +1,13 @@
 <?php
 
-namespace ForTheLocal\Token;
+namespace ForTheLocal\Laravel\Token;
 
 trait Tokenizable
 {
 
     public function tokens()
     {
-        return $this->morphMany('ForTheLocal\Token\Token', 'tokenizable');
+        return $this->morphMany('ForTheLocal\Laravel\Token\Token', 'tokenizable');
     }
 
     public function findValidToken(string $name, string $token): ?Token

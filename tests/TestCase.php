@@ -1,8 +1,9 @@
 <?php
 
-namespace ForTheLocal\Tests;
+namespace ForTheLocal\Test;
 
-use ForTheLocal\Token\Provider;
+use ForTheLocal\Laravel\Token\Provider;
+use ForTheLocal\Laravel\Token\ServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
@@ -41,7 +42,7 @@ abstract class TestCase extends OrchestraTestCase
     {
         return [
             \Orchestra\Database\ConsoleServiceProvider::class,
-            Provider::class
+            ServiceProvider::class
         ];
     }
 

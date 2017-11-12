@@ -1,14 +1,12 @@
 <?php
 
-namespace ForTheLocal\Token;
-
-use Illuminate\Support\ServiceProvider;
+namespace ForTheLocal\Laravel\Token;
 
 /**
- * Class TokenProvider
- * @package ForTheLocal\Token
+ * Class ServiceProvider
+ * @package ForTheLocal\Laravel\Token
  */
-class Provider extends ServiceProvider
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
      * Bootstrap the application services.

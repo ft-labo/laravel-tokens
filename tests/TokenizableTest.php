@@ -1,9 +1,9 @@
 <?php
 
-namespace ForThelocal\Tests;
+namespace ForTheLocal\Test;
 
-use ForTheLocal\Tests\TestCase as TestCase;
-use ForTheLocal\Token\Token;
+use ForTheLocal\Laravel\Token\Token;
+use ForTheLocal\Test\TestCase as TestCase;
 
 class TokenizableTest extends TestCase
 {
