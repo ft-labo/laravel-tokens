@@ -2,7 +2,6 @@
 
 namespace ForTheLocal\Test;
 
-use ForTheLocal\Laravel\Token\Provider;
 use ForTheLocal\Laravel\Token\ServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
