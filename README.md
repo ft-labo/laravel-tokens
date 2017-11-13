@@ -1,5 +1,5 @@
 # Laravel Tokens
-The token implementation inspired by https://github.com/fnando/tokens.
+PHP implementation of https://github.com/fnando/tokens.
 
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/forthelocal/laravel-tokens.svg)]()
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
@@ -11,7 +11,7 @@ The token implementation inspired by https://github.com/fnando/tokens.
 
 ### Installation
 ```bash
-composer require  forthelocal/laravel-tokens
+composer require forthelocal/laravel-tokens
 ```
 
 ```php
@@ -22,7 +22,7 @@ class User extends Model
 
 // create a new user; remember that the token requires an existing record
 // because it depends on its id
-$user = user = User::create();
+$user = User::create();
 
 // create token that never expires
 $user->addToken("activate");
