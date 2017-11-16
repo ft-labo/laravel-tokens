@@ -2,6 +2,7 @@
 
 namespace ForTheLocal\Test;
 
+use Faker\Provider\Uuid;
 use ForTheLocal\Laravel\Token\Token;
 use ForTheLocal\Test\TestCase as TestCase;
 
