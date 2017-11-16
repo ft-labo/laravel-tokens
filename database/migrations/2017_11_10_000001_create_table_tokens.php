@@ -25,7 +25,7 @@ class CreateTableTokens extends Migration
             $table->index(['tokenizable_type', 'tokenizable_id']);
             $table->index('token');
             $table->index('expires_at');
-            $table->index(['tokenizable_id', 'tokenizable_type', 'name'])->unique();
+            $table->unique(['tokenizable_id', 'tokenizable_type', 'name']);
         });
 
     }
