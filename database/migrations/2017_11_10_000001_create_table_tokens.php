@@ -20,7 +20,7 @@ class CreateTableTokens extends Migration
             $table->string('tokenizable_type');
             $table->string('token');
             $table->text('data')->nullable();
-            $table->dateTime('expires_at')->nullable();
+            $table->integer('expires_at')->nullable();
             $table->timestamp('created_at');
             $table->index(['tokenizable_type', 'tokenizable_id']);
             $table->index('token');
