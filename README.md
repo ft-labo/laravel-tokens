@@ -17,7 +17,7 @@ composer require forthelocal/laravel-tokens
 ```php
 class User extends Model
 {
-    use Tokenizalbe;
+    use Tokenizable;
 }
 
 // create a new user; remember that the token requires an existing record
