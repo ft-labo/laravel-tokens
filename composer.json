@@ -22,5 +22,12 @@
         "psr-4": {
             "ForTheLocal\\Test\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ForTheLocal\\Laravel\\Token\\ServiceProvider"
+            ]
+        }
     }
 }
