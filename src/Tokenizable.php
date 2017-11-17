@@ -54,6 +54,10 @@ trait Tokenizable
         $options['token'] = $options['token'] ?? Token::generateToken($options['length']);
 
 
+        if (is_integer($options['expires_at'])) {
+            $options['expires_at'] = date("Y-m-d H:i:s", $options['expires_at']);
+        }
+
         $attr = [
             'name' => $name,
             'token' => $options['token'],
@@ -79,7 +83,7 @@ trait Tokenizable
     public static function findByValidToken(string $name, string $token)
     {
         return self::whereHas('tokens', function ($query) use ($name, $token) {
-            $query->where(['name' => $name, 'token' => $token])->where('expires_at', '>', time());
+            $query->where(['name' => $name, 'token' => $token])->where('expires_at', '>', date("Y-m-d H:i:s", time()));
         })->get()->first();
     }
 

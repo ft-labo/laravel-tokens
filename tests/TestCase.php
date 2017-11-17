@@ -3,7 +3,7 @@
 namespace ForTheLocal\Test;
 
 use ForTheLocal\Laravel\Token\ServiceProvider;
-use Illuminate\Database\Schema\Blueprint;
+use ForTheLocal\Laravel\Token\ServiceTestProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
@@ -11,26 +11,6 @@ abstract class TestCase extends OrchestraTestCase
 {
     use RefreshDatabase;
 
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->setUpDatabase($this->app);
-
-    }
-
-    private function setUpDatabase($app)
-    {
-
-        $app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
-            $table->string('id')->primary();
-        });
-        $app['db']->connection()->getSchemaBuilder()->create('posts', function (Blueprint $table) {
-            $table->string('id')->primary();
-        });
-
-        include_once __DIR__ . '/support/models.php';
-    }
 
     /**
      * Load package service provider
@@ -41,7 +21,8 @@ abstract class TestCase extends OrchestraTestCase
     {
         return [
             \Orchestra\Database\ConsoleServiceProvider::class,
-            ServiceProvider::class
+            ServiceProvider::class,
+            ServiceTestProvider::class
         ];
     }
 
@@ -54,5 +35,23 @@ abstract class TestCase extends OrchestraTestCase
             'database' => ':memory:',
             'prefix' => '',
         ]);
+
+//        $app['config']->set('database.default', 'mysql');
+//        $app['config']->set('database.connections.mysql', [
+//            'driver' => 'mysql',
+//            'host' => env('DB_HOST', '127.0.0.1'),
+//            'port' => env('DB_PORT', '3306'),
+//            'database' => env('DB_DATABASE', 'test'),
+//            'username' => env('DB_USERNAME', 'root'),
+//            'password' => env('DB_PASSWORD', ''),
+//            'unix_socket' => env('DB_SOCKET', ''),
+//            'charset' => 'utf8mb4',
+//            'collation' => 'utf8mb4_unicode_ci',
+//            'prefix' => '',
+//            'strict' => true,
+//            'engine' => null,
+//        ]);
+
+        include_once __DIR__ . '/support/models.php';
     }
 }
