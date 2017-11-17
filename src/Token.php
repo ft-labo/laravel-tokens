@@ -25,7 +25,7 @@ class Token extends Model
 
     public function isExpired(): bool
     {
-        return $this->expires_at < time();
+        return $this->expires_at < date("Y-m-d H:i:s", time());
     }
 
     public static function boot()
@@ -65,7 +65,7 @@ class Token extends Model
 
     public static function clean(): int
     {
-        return Token::where('expires_at', '<', time())->delete();
+        return Token::where('expires_at', '<', date("Y-m-d H:i:s", time()))->delete();
     }
 
 }
