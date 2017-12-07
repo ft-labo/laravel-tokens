@@ -2,6 +2,7 @@
 
 namespace ForTheLocal\Laravel\Token;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 
@@ -14,6 +15,10 @@ class Token extends Model
     {
         if ($name == "data") {
             return empty($this['data']) ? json_decode('{}') : json_decode($this['data']);
+        }
+
+        if ($name == 'created_at') {
+            return new Carbon($this[$name]);
         }
 
         if (array_key_exists($name, $this->attributes)) {

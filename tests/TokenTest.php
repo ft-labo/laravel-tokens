@@ -2,6 +2,7 @@
 
 namespace ForTheLocal\Test;
 
+use Carbon\Carbon;
 use ForTheLocal\Laravel\Token\Token;
 use InvalidArgumentException;
 use ForTheLocal\Test\TestCase as TestCase;
@@ -36,6 +37,23 @@ class TokenTest extends TestCase
 
         $this->assertTrue($expiredToken->isExpired());
         $this->assertFalse($validToken->isExpired());
+
+    }
+
+    public function testCreatedAt()
+    {
+        $user = User::create();
+
+        $token = $user->addToken("created_at_test");
+
+        $this->assertNotNull($token);
+        $this->assertNotNull($token->created_at);
+        $this->assertInstanceOf(Carbon::class, $token->created_at);
+
+        $findToken = $user->findTokenByName("created_at_test");
+        $this->assertNotNull($findToken);
+        $this->assertNotNull($findToken->created_at);
+        $this->assertInstanceOf(Carbon::class, $findToken->created_at);
 
     }
 
